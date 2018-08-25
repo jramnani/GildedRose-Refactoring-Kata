@@ -40,7 +40,7 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(10);
     });
 
-    it("Backstage passes go up in quality", function() {
+    it("Backstage passes go up in quality 10 days or less before the concert", function() {
         const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 9, 10) ]);
 
         const items = gildedRose.updateQuality();
@@ -48,7 +48,7 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(12);
     });
 
-    it("Backstage passes go up in quality more closer to sell in", function() {
+    it("Backstage passes go up in quality 5 days or less before the concert", function() {
         const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) ]);
 
         const items = gildedRose.updateQuality();
@@ -56,7 +56,7 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(13);
     });
 
-    it("Backstage passes go down in quality", function() {
+    it("Backstage passes go down in quality to zero after the concert", function() {
         const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10) ]);
 
         const items = gildedRose.updateQuality();
@@ -64,7 +64,7 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(0);
     });
 
-    it("Conjured item", function() {
+    it("Conjured item loses quality twice as fast as normal items", function() {
         const gildedRose = new Shop([ new Item("Conjured item", 5, 10) ]);
 
         const items = gildedRose.updateQuality();
