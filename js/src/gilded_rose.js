@@ -24,8 +24,14 @@ class Shop {
           continue;
       }
 
+      if (currentItem.name == 'Aged Brie') {
+        currentItem.sellIn = currentItem.sellIn - 1;
+        currentItem.quality = currentItem.quality + 1;
+        continue;
+      }
+
       // Update Quality
-      if (currentItem.name != 'Aged Brie' && currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
+      if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
         if (currentItem.quality > 0) {
             currentItem.quality = currentItem.quality - 1;
             if(currentItem.name == "Conjured item") {
@@ -51,7 +57,6 @@ class Shop {
 
       // Quality decreases more after the sellIn date
       if (currentItem.sellIn < 0) {
-        if (currentItem.name != 'Aged Brie') {
           if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
             if (currentItem.quality > 0) {
                 currentItem.quality = currentItem.quality - 1;
@@ -59,9 +64,6 @@ class Shop {
           } else {
             currentItem.quality = currentItem.quality - currentItem.quality;
           }
-        } else {
-            currentItem.quality = currentItem.quality + 1;
-        }
       }
     }
 
