@@ -15,7 +15,7 @@ class Shop {
       var currentItem = this.items[i];
 
         // Sulfuras quality or sellIn doesn't change
-      if (currentItem.name == 'Sulfuras, Hand of Ragnaros') {
+      if (currentItem.name === 'Sulfuras, Hand of Ragnaros') {
         continue;
       }
 
@@ -24,13 +24,13 @@ class Shop {
           continue;
       }
 
-      if (currentItem.name == 'Aged Brie') {
+      if (currentItem.name === 'Aged Brie') {
         currentItem.sellIn = currentItem.sellIn - 1;
         currentItem.quality = currentItem.quality + 1;
         continue;
       }
 
-      if (currentItem.name == 'Backstage passes to a TAFKAL80ETC concert') {
+      if (currentItem.name === 'Backstage passes to a TAFKAL80ETC concert') {
         currentItem.sellIn = currentItem.sellIn - 1;
         currentItem.quality = currentItem.quality + 1
 
@@ -49,7 +49,7 @@ class Shop {
         continue;
       }
 
-      if (currentItem.name == "Conjured item") {
+      if (currentItem.name === "Conjured item") {
         currentItem.sellIn = currentItem.sellIn - 1;
 
         currentItem.quality = currentItem.quality - 2;
