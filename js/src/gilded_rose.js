@@ -59,26 +59,21 @@ class Shop {
         continue;
       }
 
-      // Update Quality
-      if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
-        if (currentItem.quality > 0) {
-            currentItem.quality = currentItem.quality - 1;
-        }
-      }
+      // Normal Items
 
+      // Update Quality
+      if (currentItem.quality > 0) {
+        currentItem.quality = currentItem.quality - 1;
+      }
 
       // Update sellIn
       currentItem.sellIn = currentItem.sellIn - 1;
 
       // Quality decreases more after the sellIn date
       if (currentItem.sellIn < 0) {
-          if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
-            if (currentItem.quality > 0) {
-                currentItem.quality = currentItem.quality - 1;
-            }
-          } else {
-            currentItem.quality = currentItem.quality - currentItem.quality;
-          }
+        if (currentItem.quality > 0) {
+          currentItem.quality = currentItem.quality - 1;
+        }
       }
     }
 
