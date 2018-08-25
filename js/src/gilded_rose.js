@@ -20,7 +20,7 @@ class Shop {
       }
 
       // Quality never goes above 50
-      if (currentItem.quality >= 50) {
+      if (currentItem.quality >= 50 || currentItem.quality === 0) {
           continue;
       }
 
@@ -52,9 +52,7 @@ class Shop {
       if (currentItem.name == "Conjured item") {
         currentItem.sellIn = currentItem.sellIn - 1;
 
-        if (currentItem.quality > 0) {
-          currentItem.quality = currentItem.quality - 2;
-        }
+        currentItem.quality = currentItem.quality - 2;
 
         continue;
       }
@@ -62,18 +60,14 @@ class Shop {
       // Normal Items
 
       // Update Quality
-      if (currentItem.quality > 0) {
-        currentItem.quality = currentItem.quality - 1;
-      }
+      currentItem.quality = currentItem.quality - 1;
 
       // Update sellIn
       currentItem.sellIn = currentItem.sellIn - 1;
 
       // Quality decreases more after the sellIn date
       if (currentItem.sellIn < 0) {
-        if (currentItem.quality > 0) {
-          currentItem.quality = currentItem.quality - 1;
-        }
+        currentItem.quality = currentItem.quality - 1;
       }
     }
 
