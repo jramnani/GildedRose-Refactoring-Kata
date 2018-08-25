@@ -27,7 +27,7 @@ describe("Gilded Rose", function() {
     it("The quality of an item is never negative", function() {
        const gildedRose = new Shop([
            new Item("Munster Cheese", 0, 0),
-           new Item("Sulfuras, Hand of Ragnaros", 0, 0),
+           new SulfurasItem(),
            new Item("Aged Brie", 0, 0),
            new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)
        ]);
@@ -42,7 +42,6 @@ describe("Gilded Rose", function() {
     it("The quality of an item is never over 50", function() {
         const gildedRose = new Shop([
             new Item("Munster Cheese", 5, 50),
-            new Item("Sulfuras, Hand of Ragnaros", 0, 50),
             new Item("Aged Brie", 1, 50),
             new Item("Backstage passes to a TAFKAL80ETC concert", 1, 50)
         ]);
@@ -64,11 +63,11 @@ describe("Gilded Rose", function() {
     });
 
     it("Sulfuras should stay the same", function() {
-        const gildedRose = new Shop([ new Item("Sulfuras, Hand of Ragnaros", 5, 10) ]);
+        const gildedRose = new Shop([ new SulfurasItem() ]);
 
         const items = gildedRose.updateQuality();
 
-        expect(items[0].quality).toEqual(10);
+        expect(items[0].quality).toEqual(80);
     });
 
     it("Backstage passes go up in quality 10 days or less before the concert", function() {
@@ -109,5 +108,34 @@ describe("Gilded Rose", function() {
         const items = gildedRose.updateQuality();
 
         expect(items[0].quality).toEqual(0);
+    });
+
+    it("SulfurasItem should not change in quality", function () {
+        const item = new SulfurasItem();
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.quality).toEqual(80);
+    });
+
+    it("SulfurasItem never ages", function () {
+        const item = new SulfurasItem();
+        const sellInBefore = item.sellIn;
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        const sellInAfter = item.sellIn;
+
+        expect(sellInBefore).toEqual(sellInAfter);
+    });
+
+    it("Shop can handle a SulfurasItem", function () {
+        const gildedRose = new Shop([ new SulfurasItem() ]);
+
+        const items = gildedRose.updateQuality();
+
+        expect(items[0].quality).toEqual(80);
     });
 });

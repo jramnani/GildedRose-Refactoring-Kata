@@ -6,6 +6,24 @@ class Item {
   }
 }
 
+class SulfurasItem extends Item {
+  // quality = 80;
+
+  constructor() {
+    const quality = 80;
+    const sellIn = 100;
+    super("Sulfuras, Hand of Ragnaros", sellIn, quality);
+  }
+
+  updateSellIn() {
+    // Legendary items do not expire
+  }
+
+  updateQuality() {
+    // Sulfuras quality does not change
+  }
+}
+
 class Shop {
   constructor(items=[]){
     this.items = items;
@@ -14,8 +32,9 @@ class Shop {
     for (var i = 0; i < this.items.length; i++) {
       var currentItem = this.items[i];
 
-        // Sulfuras quality or sellIn doesn't change
       if (currentItem.name === 'Sulfuras, Hand of Ragnaros') {
+        currentItem.updateSellIn();
+        currentItem.updateQuality();
         continue;
       }
 
@@ -32,7 +51,7 @@ class Shop {
 
       if (currentItem.name === 'Backstage passes to a TAFKAL80ETC concert') {
         currentItem.sellIn = currentItem.sellIn - 1;
-        currentItem.quality = currentItem.quality + 1
+        currentItem.quality = currentItem.quality + 1;
 
         if (currentItem.sellIn < 11) {
           currentItem.quality = currentItem.quality + 1;
