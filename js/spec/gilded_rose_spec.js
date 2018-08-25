@@ -43,7 +43,7 @@ describe("Gilded Rose", function() {
         const gildedRose = new Shop([
             new Item("Munster Cheese", 5, 50),
             new Item("Sulfuras, Hand of Ragnaros", 0, 50),
-            new Item("Aged Brie", 0, 50),
+            new Item("Aged Brie", 1, 50),
             new Item("Backstage passes to a TAFKAL80ETC concert", 1, 50)
         ]);
 
@@ -52,7 +52,7 @@ describe("Gilded Rose", function() {
         for (var i=0; i < items.length; i++) {
             expect(items[i].quality).toBeLessThan(51);
         }
-    })
+    });
 
     it("Aged Brie should go up in quality", function() {
         const gildedRose = new Shop([ new Item("Aged Brie", 5, 10) ]);
@@ -102,4 +102,11 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(8);
     });
 
+    it("Conjured item quality is never less than zero", function () {
+        const gildedRose = new Shop([ new Item("Conjured item", 0, 0) ]);
+
+        const items = gildedRose.updateQuality();
+
+        expect(items[0].quality).toEqual(0);
+    });
 });
