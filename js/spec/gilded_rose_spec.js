@@ -50,6 +50,7 @@ describe("Gilded Rose", function() {
         const items = gildedRose.updateQuality();
 
         for (var i=0; i < items.length; i++) {
+            // console.log("DEBUG: item = " + items[i].name + " quality =" + items[i].quality);
             expect(items[i].quality).toBeLessThan(51);
         }
     });
