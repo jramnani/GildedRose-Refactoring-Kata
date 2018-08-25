@@ -30,6 +30,25 @@ class Shop {
         continue;
       }
 
+      if (currentItem.name == 'Backstage passes to a TAFKAL80ETC concert') {
+        currentItem.sellIn = currentItem.sellIn - 1;
+        currentItem.quality = currentItem.quality + 1
+
+        if (currentItem.sellIn < 11) {
+          currentItem.quality = currentItem.quality + 1;
+        }
+
+        if (currentItem.sellIn < 6) {
+          currentItem.quality = currentItem.quality + 1;
+        }
+
+        if (currentItem.sellIn < 0) {
+          currentItem.quality = 0;
+        }
+
+        continue;
+      }
+
       if (currentItem.name == "Conjured item") {
         currentItem.sellIn = currentItem.sellIn - 1;
 
@@ -44,20 +63,9 @@ class Shop {
       if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
         if (currentItem.quality > 0) {
             currentItem.quality = currentItem.quality - 1;
-          } 
-      } else {
-          currentItem.quality = currentItem.quality + 1;
-          if (currentItem.name == 'Backstage passes to a TAFKAL80ETC concert') {
-            if (currentItem.sellIn < 11) {
-              if (currentItem.quality < 50) {
-                currentItem.quality = currentItem.quality + 1;
-              }
-            }
-            if (currentItem.sellIn < 6) {
-                currentItem.quality = currentItem.quality + 1;
-            }
-          }
+        }
       }
+
 
       // Update sellIn
       currentItem.sellIn = currentItem.sellIn - 1;
