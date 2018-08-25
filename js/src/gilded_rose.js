@@ -6,6 +6,21 @@ class Item {
   }
 }
 
+class NormalItem extends Item {
+  updateSellIn() {
+    this.sellIn -= 1;
+  }
+
+  updateQuality() {
+    this.quality -= 1;
+
+    // Quality decreases more after the sellIn date
+    if (this.sellIn < 0) {
+      this.quality -= 1;
+    }
+  }
+}
+
 class SulfurasItem extends Item {
   // quality = 80;
 

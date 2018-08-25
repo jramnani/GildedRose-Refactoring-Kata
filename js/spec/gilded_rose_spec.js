@@ -62,14 +62,6 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(11);
     });
 
-    it("Sulfuras should stay the same", function() {
-        const gildedRose = new Shop([ new SulfurasItem() ]);
-
-        const items = gildedRose.updateQuality();
-
-        expect(items[0].quality).toEqual(80);
-    });
-
     it("Backstage passes go up in quality 10 days or less before the concert", function() {
         const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 9, 10) ]);
 
@@ -137,5 +129,25 @@ describe("Gilded Rose", function() {
         const items = gildedRose.updateQuality();
 
         expect(items[0].quality).toEqual(80);
+    });
+
+    it("Normal items should decrease in quality by one each day", function () {
+        const item = new NormalItem("Munster Cheese", 5, 10);
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.sellIn).toEqual(4);
+        expect(item.quality).toEqual(9);
+    });
+
+    it("Normal items should decrease in quality twice as much after the sellIn date", function () {
+        const item = new NormalItem("Munster Cheese", 0, 10);
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.sellIn).toEqual(-1);
+        expect(item.quality).toEqual(8);
     });
 });
