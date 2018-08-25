@@ -24,6 +24,36 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(0);
     });
 
+    it("The quality of an item is never negative", function() {
+       const gildedRose = new Shop([
+           new Item("Munster Cheese", 0, 0),
+           new Item("Sulfuras, Hand of Ragnaros", 0, 0),
+           new Item("Aged Brie", 0, 0),
+           new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)
+       ]);
+
+       const items = gildedRose.updateQuality();
+
+       for (var i=0; i < items.length; i++) {
+           expect(items[i].quality).toBeGreaterThan(-1);
+       }
+    });
+
+    it("The quality of an item is never over 50", function() {
+        const gildedRose = new Shop([
+            new Item("Munster Cheese", 5, 50),
+            new Item("Sulfuras, Hand of Ragnaros", 0, 50),
+            new Item("Aged Brie", 0, 50),
+            new Item("Backstage passes to a TAFKAL80ETC concert", 1, 50)
+        ]);
+
+        const items = gildedRose.updateQuality();
+
+        for (var i=0; i < items.length; i++) {
+            expect(items[i].quality).toBeLessThan(51);
+        }
+    })
+
     it("Aged Brie should go up in quality", function() {
         const gildedRose = new Shop([ new Item("Aged Brie", 5, 10) ]);
 
