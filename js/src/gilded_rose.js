@@ -30,13 +30,20 @@ class Shop {
         continue;
       }
 
+      if (currentItem.name == "Conjured item") {
+        currentItem.sellIn = currentItem.sellIn - 1;
+
+        if (currentItem.quality > 0) {
+          currentItem.quality = currentItem.quality - 2;
+        }
+
+        continue;
+      }
+
       // Update Quality
       if (currentItem.name != 'Backstage passes to a TAFKAL80ETC concert') {
         if (currentItem.quality > 0) {
             currentItem.quality = currentItem.quality - 1;
-            if(currentItem.name == "Conjured item") {
-              currentItem.quality = currentItem.quality - 1;
-            }
           } 
       } else {
           currentItem.quality = currentItem.quality + 1;
