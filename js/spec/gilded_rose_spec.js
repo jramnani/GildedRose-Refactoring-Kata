@@ -1,7 +1,7 @@
 describe("Gilded Rose", function() {
 
     it("Normal items should degrade in quality by one over time", function() {
-        const gildedRose = new Shop([ new Item("Munster Cheese", 5, 10) ]);
+        const gildedRose = new Shop([ new NormalItem("Munster Cheese", 5, 10) ]);
 
         const items = gildedRose.updateQuality();
 
@@ -9,7 +9,7 @@ describe("Gilded Rose", function() {
     });
 
     it("Normal items should degrade in quality by twice as much after the SellIn date", function() {
-        const gildedRose = new Shop([ new Item("Munster Cheese", 0, 10) ]);
+        const gildedRose = new Shop([ new NormalItem("Munster Cheese", 0, 10) ]);
 
         const items = gildedRose.updateQuality();
 

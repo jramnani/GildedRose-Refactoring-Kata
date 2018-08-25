@@ -22,8 +22,6 @@ class NormalItem extends Item {
 }
 
 class SulfurasItem extends Item {
-  // quality = 80;
-
   constructor() {
     const quality = 80;
     const sellIn = 100;
@@ -92,17 +90,8 @@ class Shop {
       }
 
       // Normal Items
-
-      // Update Quality
-      currentItem.quality = currentItem.quality - 1;
-
-      // Update sellIn
-      currentItem.sellIn = currentItem.sellIn - 1;
-
-      // Quality decreases more after the sellIn date
-      if (currentItem.sellIn < 0) {
-        currentItem.quality = currentItem.quality - 1;
-      }
+      currentItem.updateSellIn();
+      currentItem.updateQuality();
     }
 
     return this.items;
