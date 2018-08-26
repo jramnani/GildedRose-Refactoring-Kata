@@ -22,7 +22,7 @@ describe("Gilded Rose", function() {
 
     it("The quality of an item is never below zero", function() {
        const gildedRose = new Shop([
-           new Item("Munster Cheese", 0, 0),
+           new NormalItem("Munster Cheese", 0, 0),
            new AgedBrieItem(0, 0),
            new ConjuredItem(0, 0),
            new BackstagePassItem(0, 0),
@@ -38,7 +38,7 @@ describe("Gilded Rose", function() {
 
     it("The quality of an item is never over 50 (except Sulfuras)", function() {
         const gildedRose = new Shop([
-            new Item("Munster Cheese", 5, 50),
+            new NormalItem("Munster Cheese", 5, 50),
             new AgedBrieItem(1, 50),
             new BackstagePassItem(1, 50),
             new ConjuredItem(1, 50),
