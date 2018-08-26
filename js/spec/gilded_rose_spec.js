@@ -161,4 +161,40 @@ describe("Gilded Rose", function() {
 
         expect(items[0].quality).toEqual(11);
     });
+
+    it("Backstage passes quality increases over time", function () {
+        const item = new BackstagePassItem(20, 10);
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.quality).toEqual(11);
+    });
+
+    it("Backstage passes 10 days before the concert", function () {
+        const item = new BackstagePassItem(10, 10);
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.quality).toEqual(12);
+    });
+
+    it("Backstage passes 5 days before the concert", function () {
+        const item = new BackstagePassItem(5, 10);
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.quality).toEqual(13);
+    });
+
+    it("Backstage passes quality is zero after the concert", function () {
+        const item = new BackstagePassItem(0, 10);
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.quality).toEqual(0);
+    })
 });
