@@ -29,7 +29,7 @@ describe("Gilded Rose", function() {
            new Item("Munster Cheese", 0, 0),
            new AgedBrieItem(0, 0),
            new ConjuredItem(0, 0),
-           new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0),
+           new BackstagePassItem(0, 0),
            new SulfurasItem(),
        ]);
 
@@ -44,7 +44,7 @@ describe("Gilded Rose", function() {
         const gildedRose = new Shop([
             new Item("Munster Cheese", 5, 50),
             new AgedBrieItem(1, 50),
-            new Item("Backstage passes to a TAFKAL80ETC concert", 1, 50)
+            new BackstagePassItem(1, 50),
         ]);
 
         const items = gildedRose.updateQuality();
@@ -53,30 +53,6 @@ describe("Gilded Rose", function() {
             // console.log("DEBUG: item = " + items[i].name + " quality =" + items[i].quality);
             expect(items[i].quality).toBeLessThan(51);
         }
-    });
-
-    it("Backstage passes go up in quality 10 days or less before the concert", function() {
-        const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 9, 10) ]);
-
-        const items = gildedRose.updateQuality();
-
-        expect(items[0].quality).toEqual(12);
-    });
-
-    it("Backstage passes go up in quality 5 days or less before the concert", function() {
-        const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 5, 10) ]);
-
-        const items = gildedRose.updateQuality();
-
-        expect(items[0].quality).toEqual(13);
-    });
-
-    it("Backstage passes go down in quality to zero after the concert", function() {
-        const gildedRose = new Shop([ new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10) ]);
-
-        const items = gildedRose.updateQuality();
-
-        expect(items[0].quality).toEqual(0);
     });
 
     it("SulfurasItem should not change in quality", function () {
@@ -196,5 +172,13 @@ describe("Gilded Rose", function() {
         item.updateQuality();
 
         expect(item.quality).toEqual(0);
+    });
+
+    it("Shop can handle Backstage Passes", function () {
+        const gildedRose = new Shop([ new BackstagePassItem(20, 10) ]);
+
+        const items = gildedRose.updateQuality();
+
+        expect(items[0].quality).toEqual(11);
     })
 });
