@@ -21,6 +21,8 @@ class NormalItem extends Item {
   }
 }
 
+// Special cases
+
 class AgedBrieItem extends Item {
   constructor(sellIn, quality) {
     super("Aged Brie", sellIn, quality);
@@ -32,6 +34,33 @@ class AgedBrieItem extends Item {
 
   updateQuality() {
     this.quality += 1;
+  }
+}
+
+class BackstagePassItem extends Item {
+
+  constructor(sellIn, quality) {
+    super("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+  }
+
+  updateSellIn() {
+    this.sellIn -= 1;
+  }
+
+  updateQuality() {
+    this.quality += 1;
+
+    if (this.sellIn <= 10) {
+      this.quality += 1;
+    }
+
+    if (this.sellIn <= 5) {
+      this.quality += 1;
+    }
+
+    if (this.sellIn < 0) {
+      this.quality = 0;
+    }
   }
 }
 
@@ -66,37 +95,11 @@ class SulfurasItem extends Item {
   }
 }
 
-class BackstagePassItem extends Item {
-
-  constructor(sellIn, quality) {
-    super("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
-  }
-
-  updateSellIn() {
-    this.sellIn -= 1;
-  }
-
-  updateQuality() {
-    this.quality += 1;
-
-    if (this.sellIn <= 10) {
-      this.quality += 1;
-    }
-
-    if (this.sellIn <= 5) {
-      this.quality += 1;
-    }
-
-    if (this.sellIn < 0) {
-      this.quality = 0;
-    }
-  }
-}
-
 class Shop {
   constructor(items=[]){
     this.items = items;
   }
+
   updateQuality() {
     for (var i = 0; i < this.items.length; i++) {
       var currentItem = this.items[i];
