@@ -24,12 +24,13 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(0);
     });
 
-    it("The quality of an item is never negative", function() {
+    it("The quality of an item is never below zero", function() {
        const gildedRose = new Shop([
            new Item("Munster Cheese", 0, 0),
-           new SulfurasItem(),
            new Item("Aged Brie", 0, 0),
-           new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0)
+           new ConjuredItem("Conjured item", 0, 0),
+           new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0),
+           new SulfurasItem(),
        ]);
 
        const items = gildedRose.updateQuality();
@@ -86,22 +87,6 @@ describe("Gilded Rose", function() {
         expect(items[0].quality).toEqual(0);
     });
 
-    it("Conjured item loses quality twice as fast as normal items", function() {
-        const gildedRose = new Shop([ new Item("Conjured item", 5, 10) ]);
-
-        const items = gildedRose.updateQuality();
-
-        expect(items[0].quality).toEqual(8);
-    });
-
-    it("Conjured item quality is never less than zero", function () {
-        const gildedRose = new Shop([ new Item("Conjured item", 0, 0) ]);
-
-        const items = gildedRose.updateQuality();
-
-        expect(items[0].quality).toEqual(0);
-    });
-
     it("SulfurasItem should not change in quality", function () {
         const item = new SulfurasItem();
 
@@ -149,5 +134,22 @@ describe("Gilded Rose", function() {
 
         expect(item.sellIn).toEqual(-1);
         expect(item.quality).toEqual(8);
+    });
+
+    it("Conjured items decrease in quality twice as fast as Normal items", function () {
+        const item = new ConjuredItem("Conjured item", 5, 10);
+
+        item.updateSellIn();
+        item.updateQuality();
+
+        expect(item.quality).toEqual(8);
+    });
+
+    it("Shop can handle ConjuredItems", function () {
+        const gildedRose = new Shop([ new ConjuredItem("Conjured item", 5, 10)]);
+
+        const items = gildedRose.updateQuality();
+
+        expect(items[0].quality).toEqual(8)
     });
 });

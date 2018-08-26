@@ -21,6 +21,17 @@ class NormalItem extends Item {
   }
 }
 
+class ConjuredItem extends Item {
+  updateSellIn() {
+    this.sellIn -= 1;
+  }
+
+  updateQuality() {
+    this.quality -= 2;
+  }
+
+}
+
 class SulfurasItem extends Item {
   constructor() {
     const quality = 80;
@@ -82,9 +93,8 @@ class Shop {
       }
 
       if (currentItem.name === "Conjured item") {
-        currentItem.sellIn = currentItem.sellIn - 1;
-
-        currentItem.quality = currentItem.quality - 2;
+        currentItem.updateSellIn();
+        currentItem.updateQuality();
 
         continue;
       }
