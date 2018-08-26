@@ -101,38 +101,11 @@ class Shop {
     for (var i = 0; i < this.items.length; i++) {
       var currentItem = this.items[i];
 
-      if (currentItem.name === 'Sulfuras, Hand of Ragnaros') {
-        currentItem.updateSellIn();
-        currentItem.updateQuality();
-        continue;
-      }
-
-      // Quality never goes above 50
+      // Quality never goes above 50 or below 0
       if (currentItem.quality >= 50 || currentItem.quality === 0) {
           continue;
       }
 
-      if (currentItem.name === 'Aged Brie') {
-        currentItem.updateSellIn();
-        currentItem.updateQuality();
-        continue;
-      }
-
-      if (currentItem.name === 'Backstage passes to a TAFKAL80ETC concert') {
-        currentItem.updateSellIn();
-        currentItem.updateQuality();
-
-        continue;
-      }
-
-      if (currentItem.name === "Conjured item") {
-        currentItem.updateSellIn();
-        currentItem.updateQuality();
-
-        continue;
-      }
-
-      // Normal Items
       currentItem.updateSellIn();
       currentItem.updateQuality();
     }
