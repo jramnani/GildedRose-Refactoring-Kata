@@ -21,6 +21,20 @@ class NormalItem extends Item {
   }
 }
 
+class AgedBrieItem extends Item {
+  constructor(sellIn, quality) {
+    super("Aged Brie", sellIn, quality);
+  }
+
+  updateSellIn() {
+    this.sellIn -= 1;
+  }
+
+  updateQuality() {
+    this.quality += 1;
+  }
+}
+
 class ConjuredItem extends Item {
   constructor(sellIn, quality) {
     super("Conjured item", sellIn, quality);
@@ -72,8 +86,8 @@ class Shop {
       }
 
       if (currentItem.name === 'Aged Brie') {
-        currentItem.sellIn = currentItem.sellIn - 1;
-        currentItem.quality = currentItem.quality + 1;
+        currentItem.updateSellIn();
+        currentItem.updateQuality();
         continue;
       }
 
