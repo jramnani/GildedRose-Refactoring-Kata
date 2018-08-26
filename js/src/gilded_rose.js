@@ -22,6 +22,10 @@ class NormalItem extends Item {
 }
 
 class ConjuredItem extends Item {
+  constructor(sellIn, quality) {
+    super("Conjured item", sellIn, quality);
+  }
+
   updateSellIn() {
     this.sellIn -= 1;
   }

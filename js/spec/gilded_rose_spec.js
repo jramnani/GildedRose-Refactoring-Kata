@@ -28,7 +28,7 @@ describe("Gilded Rose", function() {
        const gildedRose = new Shop([
            new Item("Munster Cheese", 0, 0),
            new Item("Aged Brie", 0, 0),
-           new ConjuredItem("Conjured item", 0, 0),
+           new ConjuredItem(0, 0),
            new Item("Backstage passes to a TAFKAL80ETC concert", 0, 0),
            new SulfurasItem(),
        ]);
@@ -137,7 +137,7 @@ describe("Gilded Rose", function() {
     });
 
     it("Conjured items decrease in quality twice as fast as Normal items", function () {
-        const item = new ConjuredItem("Conjured item", 5, 10);
+        const item = new ConjuredItem(5, 10);
 
         item.updateSellIn();
         item.updateQuality();
@@ -146,7 +146,7 @@ describe("Gilded Rose", function() {
     });
 
     it("Shop can handle ConjuredItems", function () {
-        const gildedRose = new Shop([ new ConjuredItem("Conjured item", 5, 10)]);
+        const gildedRose = new Shop([ new ConjuredItem(5, 10)]);
 
         const items = gildedRose.updateQuality();
 
